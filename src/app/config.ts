@@ -4,14 +4,13 @@ import { injected, metaMask, safe, walletConnect } from "wagmi/connectors"
 
 export const config = createConfig({
   connectors: [
-    injected(),
+    // injected(),
     walletConnect({ projectId: "bd461e19f604531e1531b240e3b180e4" }),
-    metaMask(),
-    safe(),
+    // metaMask(),
+    // safe(),
   ],
   chains: [mainnet, sepolia],
   ssr: true,
-  multiInjectedProviderDiscovery: true,
   storage: createStorage({
     storage: cookieStorage,
   }),
