@@ -1,33 +1,32 @@
-import Link from "next/link"
+"use client"
 
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
-import { ModeToggle } from "@/components/mode-toggle"
+import { useSignatureConnect } from "@/store/useSignatureConnect"
+
+import useWagmiAccount from "@/hooks/useWagmiAccount"
+import { Account } from "@/components/account"
+import ConnectSignature from "@/components/connect-signature"
+import { LoggerView } from "@/components/logger-view"
+import { WalletOptions } from "@/components/wallet-option"
 
 export default function Home() {
+  const { isConnected } = useWagmiAccount()
+  const { signature } = useSignatureConnect()
   return (
-    <main className="flex h-screen items-center justify-center">
-      <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
-        <Icons.logo className="h-16 w-16" />
-        <h1 className="text-4xl font-semibold sm:text-5xl md:text-6xl lg:text-7xl">
-          {siteConfig.name}
-        </h1>
-        <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-          {siteConfig.description}
-        </p>
-        <div className="flex gap-2">
-          <Link
-            href={siteConfig.links.github}
-            target="_blank"
-            className={cn(buttonVariants({ size: "default" }))}
-          >
-            Get Started
-          </Link>
-          <ModeToggle />
-        </div>
+    <div className="flex flex-row gap-2 p-4">
+      <div className="w-[50%]">
+        {isConnected ? (
+          signature ? (
+            <Account />
+          ) : (
+            <ConnectSignature />
+          )
+        ) : (
+          <WalletOptions />
+        )}
       </div>
-    </main>
+      <div className="w-[50%]">
+        <LoggerView />
+      </div>
+    </div>
   )
 }
