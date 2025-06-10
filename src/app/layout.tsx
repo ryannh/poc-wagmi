@@ -7,6 +7,7 @@ import { cookieToInitialState } from "wagmi"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
+import { useIsTelegramMiniApp } from "@/hooks/useIsTelegramMiniApp"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import { config } from "./config"
@@ -70,6 +71,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   const initialState = cookieToInitialState(config, headers().get("cookie"))
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
