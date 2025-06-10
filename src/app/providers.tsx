@@ -29,12 +29,12 @@ export function Providers({ children, initialState }: Props) {
       token: token,
       appName: appName,
     })
-    if (isTMA) {
-      TelegramAnalytics.init({
-        token: token,
-        appName: appName,
-      })
-    }
+    // if (isTMA) {
+    TelegramAnalytics.init({
+      token: token,
+      appName: appName,
+    })
+    // }
   }, [isTMA])
 
   return (
